@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-setup(name='winblue',
+setup(name='dualtooth',
     version='0.1.1',
     packages=find_packages(),
     description='Extract Bluetooth pairing information from a Windows registry hive',
@@ -10,7 +10,7 @@ setup(name='winblue',
     ],
     entry_points={
         'console_scripts': [
-        'winblue=winblue.run:main',
+        'dualtooth=dualtooth.run:main',
         ],
     },
 )
