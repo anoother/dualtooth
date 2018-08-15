@@ -15,7 +15,7 @@ def descend(key, maxdepth=None):
     for value in key.values():
         out[key.name()][value.name()] = value.value()
     for subkey in key.subkeys():
-        out[key.name()][subkey.name()] = descend(subkey)
+        out[key.name()][subkey.name()] = descend(subkey, maxdepth)
     return out
 
 def main():
@@ -23,4 +23,4 @@ def main():
     hive = Registry.Registry(regfile)
 
     le = hive.open(constants.PATHS['btle'])
-    pprint(descend(le), indent=2)
+    pprint(descend(le, 6), indent=2)
