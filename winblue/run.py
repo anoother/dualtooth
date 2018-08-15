@@ -3,7 +3,7 @@ from __future__ import absolute_import
 from sys import argv
 from Registry import Registry
 from pprint import pprint
-from . import constants
+from .constants import *
 
 
 def descend(key, maxdepth=None):
@@ -22,5 +22,5 @@ def main():
     regfile=argv[1]
     hive = Registry.Registry(regfile)
 
-    le = hive.open(constants.PATHS['btle'])
-    pprint(descend(le, 6), indent=2)
+    le = hive.open(PATHS['btle'])
+    pprint(descend(le, MAXDEPTH), indent=2)
