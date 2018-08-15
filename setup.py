@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(name='winblue',
-    version='0.1.0',
+    version='0.1.1',
     packages=find_packages(),
     description='Extract Bluetooth pairing information from a Windows registry hive',
     author='Ahmad Jagot',
@@ -10,7 +10,7 @@ setup(name='winblue',
     ],
     entry_points={
         'console_scripts': [
-        'winblue=winblue:main',
+        'winblue=winblue.run:main',
         ],
     },
 )
