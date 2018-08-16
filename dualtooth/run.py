@@ -11,11 +11,11 @@ def descend(key, maxdepth=None):
         return Ellipsis
     elif maxdepth:
         maxdepth -= 1
-    out = {key.name(): {}}
+    out = {}
     for value in key.values():
-        out[key.name()][value.name()] = value.value()
+        out[value.name()] = value.value()
     for subkey in key.subkeys():
-        out[key.name()][subkey.name()] = descend(subkey, maxdepth)
+        out[subkey.name()] = descend(subkey, maxdepth)
     return out
 
 def main():
