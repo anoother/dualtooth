@@ -24,13 +24,10 @@ def get_attrs(dev_id, dev_dict):
     out = {}
     for thing in ['Name', 'VIDType', 'VID', 'PID', 'Version']:
         out[thing] = dev_dict.get(thing) #.rstrip('\x00')
-    #if dev_dict['LEFlags']:
-    #    out['is_LE'] = True
-    #else:
-    #    out['is_LE'] = False
     
     for s4 in [dev_dict[key] for key in dev_dict.keys() if key.startswith('ServicesFor')]:
-        out.update(s4)
+        for thing in ['LEFlags', 'LEAddressType', 'LEAppearance']:
+            out[thing] = s4.get(thing)
         break
 
     return out
