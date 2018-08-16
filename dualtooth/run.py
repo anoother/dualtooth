@@ -22,14 +22,12 @@ def descend(key, maxdepth=None):
 
 def get_attrs(dev_id, dev_dict):
     out = {}
-    for thing in ['Name', 'VIDType', 'VID', 'PID', 'Version']:
-        out[thing] = dev_dict.get(thing) #.rstrip('\x00')
-    
+    for attr, name in ATTRS:
+        out[name] = dev_dict.get(attr) #.rstrip('\x00')
     for s4 in [dev_dict[key] for key in dev_dict.keys() if key.startswith('ServicesFor')]:
-        for thing in ['LEFlags', 'LEAddressType', 'LEAppearance']:
-            out[thing] = s4.get(thing)
+        for attr, name in ATTRS_BLE:
+            out[name] = s4.get(attr)
         break
-
     return out
 
 
