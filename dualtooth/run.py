@@ -7,7 +7,7 @@ from .constants import *
 
 
 def descend(key, maxdepth=None):
-    if maxdepth == 0:
+    if maxdepth < 1:
         return Ellipsis
     elif maxdepth:
         maxdepth -= 1
@@ -18,9 +18,22 @@ def descend(key, maxdepth=None):
         out[subkey.name()] = descend(subkey, maxdepth)
     return out
 
+
+def get_attrs(dev_id, dev_dict):
+    out = {}
+    for thing in ['Name', 'VIDType', 'VID', 'PID', 'Version']:
+        out[thing] = dev_dict.get(thing) #.rstrip('\x00')
+    return out
+
+
 def main():
     regfile=argv[1]
     hive = Registry.Registry(regfile)
 
     le = hive.open(PATHS['btle'])
-    pprint(descend(le, MAXDEPTH), indent=2)
+    devices = descend(le, MAXDEPTH)
+
+    pprint(devices, indent=2)
+
+    devices = [get_attrs(*dev) for dev in devices['Devices'].items()]
+    pprint(devices)
